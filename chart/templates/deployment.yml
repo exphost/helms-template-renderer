@@ -17,7 +17,7 @@ spec:
       serviceAccount: template-renderer
       containers:
         - name: renderer
-          image: registry.home.exphost.pl/exphost/template-renderer:{{ .Chart.AppVersion }}
+          image: registry.exphost.pl/exphost/template-renderer:{{ .Chart.AppVersion }}
           imagePullPolicy: Always
           #command: 
           #  - /app/renderer.py
