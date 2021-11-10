@@ -17,7 +17,8 @@ spec:
       serviceAccount: template-renderer
       containers:
         - name: renderer
-          image: registry.gitlab.exphost.pl/exphost/template-renderer:{{ .Chart.AppVersion }}
+          image: registry.gitlab.exphost.pl/exphost/template-renderer:{{ .Values.image.tag | default .Chart.AppVersion }}
           imagePullPolicy: Always
-          #command: 
-          #  - /app/renderer.py
+          ports:
+            - containerPort: 8000
+              name: metrics
