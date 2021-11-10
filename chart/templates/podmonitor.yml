@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: template-renederer-podmonitor
+  labels:
+    app: template-renderer
+spec:
+  podMetricsEndpoints:
+  - interval: 5s
+    port: metrics
+  selector:
+    matchLabels:
+      app: template-renderer
