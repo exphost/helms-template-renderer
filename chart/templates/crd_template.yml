@@ -4,6 +4,13 @@ metadata:
   name: templates.exphost.pl
 spec:
   group: exphost.pl
+  scope: Namespaced
+  names:
+    plural: templates
+    singular: template
+    kind: Template
+    shortNames:
+    - tpl
   versions:
     - name: v1
       served: true
@@ -15,11 +22,10 @@ spec:
             spec:
               type: object
               properties:
-                template:
-                  type: string
+                templates:
+                  type: object
+                  additionalProperties: true
                 destination_name:
-                  type: string
-                destination_key:
                   type: string
                 destination_labels:
                   type: object
@@ -42,11 +48,3 @@ spec:
                         type: string
                       source_key:
                         type: string
-                    
-  scope: Namespaced
-  names:
-    plural: templates
-    singular: template
-    kind: Template
-    shortNames:
-    - tpl
