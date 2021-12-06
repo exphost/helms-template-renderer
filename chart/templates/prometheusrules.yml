@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: template-renederer-expcetions
+  namespace: template-renderer
+  labels:
+    prometheus: example
+    role: alert-rules
+spec:
+  groups:
+  - name: template renderer
+    rules:
+    - alert: exceptions
+      expr: rate(template_renderer_render_exceptions_total[2m]) > 0
+      annotations:
+        summary: Template renderer rendering error (instance {{ "{{" }} $labels.namespace {{ "}}" }} / {{" {{" }} $labels.pod {{ "}})" }}
