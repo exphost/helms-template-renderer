@@ -1,3 +1,20 @@
 ---
 include:
   - https://gitlab.exphost.pl/exphost/exphost-helms/-/raw/master/common/gitlab-ci.yml
+
+stages:
+  - check
+  - upload
+  - deploy
+
+deploy-to-dev:
+  stage: deploy
+  extends: .deploy-to-git-subapp
+  environment:
+    name: dev
+  variables:
+    repo: git@gitlab.exphost.pl:exphost/exphost-config-home-lab.git
+    yamlfile: exphost-core.yml
+    app: templateRenderer
+    waitapp: template-renderer
+    refreshapp: cluster-config
