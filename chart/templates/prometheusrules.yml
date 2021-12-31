@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: template-renederer-expcetions
+  name: template-renederer
   namespace: template-renderer
   labels:
     prometheus: example
@@ -14,3 +14,10 @@ spec:
       expr: rate(template_renderer_render_exceptions_total[2m]) > 0
       annotations:
         summary: Template renderer rendering error (instance {{ "{{" }} $labels.namespace {{ "}}" }} / {{" {{" }} $labels.pod {{ "}})" }}
+  - name: runtime
+    rules:
+    - alert: number of pods
+      expr: count(up{job="template-renderer/template-renederer-podmonitor"}) != 1
+      annotations:
+        summary: There should be only on template-renderer
+      for: 1m
