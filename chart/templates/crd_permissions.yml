@@ -1,0 +1,10 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: aggregate-templates-to-admin
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+- apiGroups: ["exphost.pl"]
+  resources: ["templates"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
